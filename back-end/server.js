@@ -19,6 +19,7 @@ app.use( cors() );
 // Body Parser
 app.use(express.json())
 
+
 app.get('/', (req, res, next) => {
     res.status(200).json({
         status: 'success',
