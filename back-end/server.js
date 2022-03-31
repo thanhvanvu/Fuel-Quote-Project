@@ -19,18 +19,12 @@ app.use( cors() );
 // Body Parser
 app.use(express.json())
 
+// Connect AuthRoute to server.js
+const authRoute = require('./routes/authRoute');
 
-app.get('/', (req, res, next) => {
-    res.status(200).json({
-        status: 'success',
-        data: {
-            quote: [{
-                content: "hello",
-                data: "10/20/2012"
-            }]
-        }
-    })
-})
+
+// Mount the route
+app.use('/api/v1/auth', authRoute);
 
 
 app.listen(port, () => {
