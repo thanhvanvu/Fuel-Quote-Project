@@ -19,12 +19,14 @@ app.use( cors() );
 // Body Parser
 app.use(express.json())
 
-// Connect AuthRoute to server.js
+// Connect AuthRoute, quoteRoute to server.js
 const authRoute = require('./routes/authRoute');
+const quoteRoute = require('./routes/quoteRoute');
 
 
 // Mount the route
 app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/quotes', quoteRoute);
 
 
 app.listen(port, () => {
