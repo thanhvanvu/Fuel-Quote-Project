@@ -68,3 +68,48 @@ exports.login = async (req, res, next) => {
         res.json(error)
     }
 }
+
+
+// Get current User
+exports.getCurrentUser = async (req, res, next) => {
+    try {
+        const data = { user: null };
+        if (req.user) {
+            const user = await User.findOne({ _id: req.user.userId });
+            data.user = {  // assign object into user, then assign into data
+                userId: user._id,
+                address1: user.address1,
+                address2: user.address2,
+                city: user.city,
+                state: user.state,
+                zipcode: user.zipcode,
+                name: user.name,
+            }
+        }
+
+        res.status(200).json({
+            status: 'success',
+            data: data
+        })
+
+    } catch (error) {
+        res.json(error);
+    }
+};
+
+// Update Current User
+exports.updateCurrentUser = async (req, res, next) =>{
+    try{
+
+        const { userId } = req.params;
+
+        const userProfile = await User.findByIdAndUpdate(userId, {...req.body}, {new: true, runValidator: true})
+
+        res.status(200).json({
+            status: 'success',
+            data: {userProfile}
+        })
+    }catch (error){
+        res.json(error)
+    }
+}
