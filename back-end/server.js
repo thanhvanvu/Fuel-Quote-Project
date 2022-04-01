@@ -32,3 +32,14 @@ app.use('/api/v1/quotes', quoteRoute);
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
 })
+
+// Unhandled Route
+app.all('*', (req, res, next) => {
+    const err = new Error('The Route can not be found');
+    err.statusCode = 404;
+    next(err);
+})
+
+// Import Error Handler, must be after all Routes
+const {errorHandler} = require('./middlewares/errorHandler');
+app.use(errorHandler);

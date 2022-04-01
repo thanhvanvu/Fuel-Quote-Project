@@ -22,7 +22,7 @@ exports.register = async (req, res, next) => {
         });
 
     } catch (error) {
-       res.json(error)
+       next(error)
     }
 }
 
@@ -34,7 +34,9 @@ exports.login = async (req, res, next) => {
 
         if (!user) {
             //Error: Email is not correct
-
+            const err = new Error('Email is not correct')
+            err.statusCode = 400;
+            return next(err) // send this error to errorHandler
         }
 
         //body.password: pass client inputs in the form
@@ -62,6 +64,9 @@ exports.login = async (req, res, next) => {
 
         } else {
             // Error: Password is not correct.
+            const err = new Error('Password is not correct')
+            err.statusCode = 400;
+            return next(err) // send this error to errorHandler
         }
 
     } catch (error) {
@@ -110,6 +115,6 @@ exports.updateCurrentUser = async (req, res, next) =>{
             data: {userProfile}
         })
     }catch (error){
-        res.json(error)
+        next(error)
     }
 }

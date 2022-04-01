@@ -7,6 +7,9 @@ exports.verifyToken = (req, res, next) => {
 
     if (!Authorization){
         //Error: Unauthorized
+        const err = new Error('Unauthorized');
+        err.statusCode = 401;
+        return next(err) // send this error to errorHandler
     };
 
     // Get Token
