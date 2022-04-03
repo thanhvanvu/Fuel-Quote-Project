@@ -1,25 +1,60 @@
-import { BrowserRouter, Routes, Route, } from "react-router-dom";
 import Footer from "./components/Footer";
+import FuelQuote from "./components/FuelQuote";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Login from "./components/Login";
-import Register from "./components/Register";
-import FuelQuote from "./components/FuelQuote";
 import QuoteHistory from "./components/QuoteHistory";
+import Register from "./components/Register";
 import UserProfile from "./components/UserProfile";
+import { BrowserRouter, Routes, Route, } from "react-router-dom";
 import AppReducer from './reducers/AppReducer';
-import { useReducer } from "react";
+import { useCallback, useEffect, useReducer } from "react";
 import AppContext from "./components/AppContext";
+import axios from "axios";
 
 function App() {
 
   const initialState = { user: null, quotes: [] };
+  
   const [state, dispatch] = useReducer(AppReducer, initialState);
+
+  // Check current user everytime user reload the page
+  const checkCurrentUser = useCallback( async () =>{
+
+    try {
+
+      const token = localStorage.getItem("token");
+      const options = {
+        method: "get",
+        url: "api/v1/auth/",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
+
+      const response = await axios(options);
+      
+      if (response.data.data.user){
+        const user  = response.data.data.user;
+        dispatch({
+          type: "CURRENT_USER",payload: user
+        })
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+
+  },[dispatch]);
+
+  useEffect( () => {
+    checkCurrentUser();
+  }, [checkCurrentUser]);
 
   return (
     <BrowserRouter>
 
-      <AppContext.Provider value={{ state, dispatch }}>
+      <AppContext.Provider value={ {state, dispatch} }>
 
         <div >
           <div id="top">
@@ -29,38 +64,38 @@ function App() {
             <Routes>
 
               {/* Route Landing Page */}
-              <Route path="/" element={<Hero />} />
+              <Route path="/" element={<Hero/>} />
 
               {/* Route Login */}
-              <Route path="/login" element={<Login />} />
+              <Route path="/login" element={<Login/>} />
 
               {/* Route FuelQuote */}
-              <Route path="/register" element={<Register />} />
+              <Route path="/register" element={<Register/>} />
 
               {/* Route FuelQuote */}
-              <Route path="/fuelQuote" element={<FuelQuote />} />
+              <Route path="/fuelQuote" element={<FuelQuote/>} />
 
               {/* Route QuoteHistory */}
-              <Route path="/quoteHistory" element={<QuoteHistory />} />
+              <Route path="/quoteHistory" element={<QuoteHistory/>} />
 
               {/* Route UserProfile */}
-              <Route path="/userProfile" element={<UserProfile />} />
+              <Route path="/userProfile" element={<UserProfile/>} />
 
               {/* Route others */}
               <Route path="*" element={<div className="error-route container">Page Not Found</div>} />
-
+              
             </Routes>
-
+          
           </div>
 
           <Footer />
-
+          
         </div>
 
       </AppContext.Provider>
-      
-    </BrowserRouter>
 
+    </BrowserRouter>
+    
 
   );
 }
