@@ -2,13 +2,12 @@ header #hero{
 	margin-top: 125px;
 }
 
-#fuel{
+#fuel-history{
 
-	border: 2px solid #f2f2f2 ;
+	border: 1px solid #f2f2f2 ;
 	border-radius: 5px;
 	box-shadow: 0px 27px 43px rgb(32, 94, 171, 0.4);
 }
-
 
 #form-name h2 {
 	text-align: center;
@@ -33,7 +32,7 @@ header #hero{
 
 }
 
-#fuel table{
+#fuel-history table{
 	table-layout: fixed;
 	width: 100%;
 	border-collapse: collapse;

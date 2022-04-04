@@ -6,6 +6,11 @@ const quoteSchema = new mongoose.Schema({
         trim: true
     },
 
+    delivery_address: {
+        type: String,
+        trim: true
+    },
+
     delivery_date: {
         type: Date,
         trim: true

@@ -4,7 +4,7 @@
 
 #fuel-form{
 
-	border: 2px solid #f2f2f2 ;
+	border: 1px solid #f2f2f2 ;
 	border-radius: 5px;
 	box-shadow: 0px 27px 43px rgb(32, 94, 171, 0.4);
 }
@@ -32,7 +32,7 @@
 }
 
 #fuel-form #information div{
-	margin-top: 15px;
+	margin-top: 20px;
 }
 
 
@@ -79,7 +79,7 @@
 
 }
 
-#fuel-form #information #delivery-address p{
+#fuel-form #information #delivery-address input{
 	display: block;
 	font-family: poppins-medium;
 	font-size: 18px;
@@ -137,7 +137,7 @@
 	line-height: 26px;
 }
 
-#fuel-form #result div input{
+#fuel-form #result div input:not(.result){
 	display: inline-block;
 	font-family: poppins-medium;
 	font-size: 18px;
@@ -163,10 +163,12 @@
 }
 
 #fuel-form #information #fuel-submit{
-	margin-top: 25px;
+	margin-top: 30px;
+	display: flex;
+	justify-content: space-around;
 }
 
-#fuel-form #information #fuel-submit button{
+#fuel-form #information #fuel-submit .button{
 	display: inline-block;
 	font-family: poppins-medium;
 	font-size: 18px;
@@ -177,11 +179,11 @@
 	border-radius: 5px;
 	padding: 11px 26px;
 	cursor: pointer;
-	width: 100%;
+	width: 25%;
 	transition: all 0.3s;
 }
 
-#fuel-form #information #fuel-submit button:hover{
+#fuel-form #information #fuel-submit .button:hover{
 	background-color: #a425c8;
     transform: translateY(3px);
 }
@@ -192,4 +194,35 @@
 	font-size: 18px;
 	line-height: 26px;
 	color: #494848;
+}
+
+.button-disabled{
+	display: inline-block;
+	font-family: poppins-medium;
+	font-size: 18px;
+	line-height: 26px;
+	border: 1px solid #b7b4b8;
+	background-color: #b7b4b8;
+	color: white;
+	border-radius: 5px;
+	padding: 11px 26px;
+	cursor: pointer;
+	width: 25%;
+}
+
+.result {
+	display: inline-block;
+	font-family: poppins-medium;
+	font-size: 18px;
+	line-height: 26px;
+	padding-top: 7px ;
+	padding-bottom: 7px;
+	padding-left: 20px;
+	border: 2px solid #dfdfdf;
+	border-radius: 10px;
+	color: #1ebd1e;
+	background-color: #f0eef0;
+	outline: none;
+	width: 100%;
+	font-weight: bold;
 }

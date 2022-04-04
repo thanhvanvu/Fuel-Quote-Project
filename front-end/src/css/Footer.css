@@ -2,6 +2,7 @@ footer{
 	background: #f4efec url('../../public/image/footer/footer.png') no-repeat center top ;
 	padding-bottom: 60px;
 	padding-top: 170px;
+	background-size: cover;
 }
 
 footer #footer-wraper{

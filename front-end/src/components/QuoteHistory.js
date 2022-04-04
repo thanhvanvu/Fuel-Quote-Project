@@ -1,12 +1,64 @@
+import React, { useEffect, useCallback, useContext } from 'react'
 import '../css/QuoteHistory.css'
 import QuoteHistoryItems from './QuoteHistoryItems'
+import axios from 'axios';
 
+import AppContext from './AppContext';
 
 export default function QuoteHistory() {
+
+    const { state, dispatch } = useContext(AppContext);
+
+    // get quotes and user in state
+    const {quotes, user} = state
+
+    // function to request to get all Quotes
+    const getAllQuotes = useCallback(async() => {
+
+        try {
+            const options = {
+                method: "get", // must be method get
+                url: "/api/v1/quotes/quoteHistory",
+            }
+
+            // after succesfully requested, data will be saved into response
+            const response = await axios(options);
+            console.log(response)
+            const quotes = response.data.data.quotes;
+
+            dispatch({
+                type: "GET_ALL_QUOTES",
+                payload: quotes
+            });
+
+        } catch (error) {
+            console.log(error);
+        }
+    }, [dispatch]) 
+
+    useEffect( () => {
+        getAllQuotes()
+    },[getAllQuotes]);
+
+
+    const userQuotes = quotes.map( (quote) =>{
+
+        // check if user is present
+        if (user) {
+            if (quote.author.name === user.name){
+                return {...quote, isCurrentUser: true}
+            }else{
+                return quote;
+            }
+        }else{
+            return {...quote, isCurrentUser: false}
+        }
+    })
+
     return (
         <div id="hero" className="container">
 
-            <div id="fuel">
+            <div id="fuel-history">
 
                 <div id="form-name">
                     <h2>Fuel Quote History</h2>
@@ -24,15 +76,24 @@ export default function QuoteHistory() {
                                 <th scope="col" className="amount">Total Amount Due </th>
                             </tr>
                         </thead>
+                        
+                        {userQuotes.map((quote) => (
+                            quote.isCurrentUser && (
 
-                        <QuoteHistoryItems
-
-                        />
-
+                                <QuoteHistoryItems 
+                                    quote={quote} 
+                                    key={quote._id}
+                                />
+                            )
+                        ))}
+                        
                     </table>
                 </div>
 
+
+
             </div>
+
 
         </div>
     )
