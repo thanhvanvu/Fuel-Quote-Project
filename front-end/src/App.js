@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import QuoteHistory from "./components/QuoteHistory";
 import Register from "./components/Register";
 import UserProfile from "./components/UserProfile";
+import AllUsers from "./components/AllUsers"
 import { BrowserRouter, Routes, Route, } from "react-router-dom";
 import AppReducer from './reducers/AppReducer';
 import { useCallback, useEffect, useReducer } from "react";
@@ -14,7 +15,7 @@ import axios from "axios";
 
 function App() {
 
-  const initialState = { user: null, quotes: [] };
+  const initialState = { user: null, quotes: [], users: [] };
   
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
@@ -65,6 +66,10 @@ function App() {
 
               {/* Route Landing Page */}
               <Route path="/" element={<Hero/>} />
+
+              
+              <Route path="/allUsers" element={<AllUsers/>} />
+
 
               {/* Route Login */}
               <Route path="/login" element={<Login/>} />

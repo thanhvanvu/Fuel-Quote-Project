@@ -1,8 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState} from "react";
 import axios from "axios";
 import AppContext from './AppContext';
 
+
+
 export default function UserProfileItem({user}) {
+
 
     const { dispatch } = useContext(AppContext);
 
@@ -58,7 +61,6 @@ export default function UserProfileItem({user}) {
                                 <div id="profile-wrap">
                                     <div id="name">
                                         <label>Full Name</label>
-
                                         <p>{user.name}</p>
                                     </div>
 
@@ -139,6 +141,7 @@ export default function UserProfileItem({user}) {
                                                 setUserToEdit({...userToEdit, name: e.target.value})
                                             }
                                             required
+                    
                                         />
                                     </div>
 
@@ -149,11 +152,11 @@ export default function UserProfileItem({user}) {
                                             id="address1"
                                             name="address1"
                                             placeholder="Enter Address 1"
-                                            required
                                             value={userToEdit.address1}
                                             onChange={ (e) => 
                                                 setUserToEdit({...userToEdit, address1: e.target.value})
                                             }
+                                            required
                                         />
                                     </div>
 
@@ -168,6 +171,7 @@ export default function UserProfileItem({user}) {
                                             onChange={ (e) => 
                                                 setUserToEdit({...userToEdit, address2: e.target.value})
                                             }
+                                        
                                         />
                                     </div>
 
@@ -185,6 +189,7 @@ export default function UserProfileItem({user}) {
                                                 onChange={ (e) => 
                                                     setUserToEdit({...userToEdit, city: e.target.value})
                                                 }
+                                                
                                             />
                                         </div>
 
@@ -197,6 +202,8 @@ export default function UserProfileItem({user}) {
                                                 onChange={ (e) => 
                                                     setUserToEdit({...userToEdit, state: e.target.value})
                                                 }
+                                                required
+                                           
                                             >
                                                 <option selected>Choose...</option>
                                                 <option>AA</option>
@@ -269,6 +276,7 @@ export default function UserProfileItem({user}) {
                                                 onChange={ (e) => 
                                                     setUserToEdit({...userToEdit, zipcode: e.target.value})
                                                 }
+                                             
 
                                             />
                                         </div>

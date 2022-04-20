@@ -43,31 +43,45 @@ export default function Header() {
                     {/* if user is available */}
                     {user ? (
                         <>
-
-                            { ( user.address1 === "" & user.state === "" & user.city ==="" & user.zipcode==="" ) &&
+                            {/* If user is admin */}
+                            {user.isAdmin ? (
                                 <>
-                                    <li onClick={signOut}>
-                                        <Link to='/'>Sign out</Link>
-                                    </li>
-                                    <li id='name'><Link to='/userProfile'>Hello, {user.name}</Link></li>
-                                </>
-                            } 
-
-                            { (user.address1 || user.state || user.city  || user.zipcode) &&
-
-                                <>  
-                                    
-                                    <li id='name'><Link to='/userProfile'>Hello, {user.name}</Link></li>
-
+                                    <li id='name'><Link to=''>Hello, {user.name}</Link></li>
+                                    <li><Link to='/allUsers'>All Users</Link></li>
                                     <li><Link to='/quoteHistory'>Quote History</Link></li>
-
                                     <li onClick={signOut}>
                                         <Link to='/'>Sign out</Link>
                                     </li>
-
-                                    <li className='fuel-quote'><Link to='/fuelQuote'>Fuel Quote</Link></li>
                                 </>
-                            }
+                            ) : (
+                                // If user is not admin
+                                <>
+                                    {(user.address1 === "" & user.state === "" & user.city === "" & user.zipcode === "") &&
+                                        <>
+                                            <li onClick={signOut}>
+                                                <Link to='/'>Sign out</Link>
+                                            </li>
+                                            <li id='name'><Link to='/userProfile'>Hello, {user.name}</Link></li>
+                                        </>
+                                    }
+
+                                    {(user.address1 || user.state || user.city || user.zipcode) &&
+
+                                        <>
+
+                                            <li id='name'><Link to='/userProfile'>Hello, {user.name}</Link></li>
+
+                                            <li><Link to='/quoteHistory'>Quote History</Link></li>
+
+                                            <li onClick={signOut}>
+                                                <Link to='/'>Sign out</Link>
+                                            </li>
+
+                                            <li className='fuel-quote'><Link to='/fuelQuote'>Fuel Quote</Link></li>
+                                        </>
+                                    }
+                                </>
+                            )}
 
                         </>
 

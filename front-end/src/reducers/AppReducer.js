@@ -1,7 +1,7 @@
 export default function reducer(state, action) {
 
     switch (action.type) {
-        
+
         case "CURRENT_USER":
             return {
                 ...state,
@@ -12,6 +12,12 @@ export default function reducer(state, action) {
             return {
                 ...state,
                 user: action.payload
+            };
+
+        case "GET_ALL_USERS":
+            return {
+                ...state,
+                users: action.payload
             };
 
         case "GET_ALL_QUOTES":

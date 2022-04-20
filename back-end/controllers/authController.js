@@ -58,7 +58,8 @@ exports.login = async (req, res, next) => {
                     address2: user.address2,
                     city: user.city,
                     state: user.state,
-                    zipcode: user.zipcode
+                    zipcode: user.zipcode,
+                    isAdmin: user.isAdmin
                 }
             });
 
@@ -89,6 +90,7 @@ exports.getCurrentUser = async (req, res, next) => {
                 state: user.state,
                 zipcode: user.zipcode,
                 name: user.name,
+                isAdmin: user.isAdmin
             }
         }
 
@@ -118,3 +120,26 @@ exports.updateCurrentUser = async (req, res, next) =>{
         next(error)
     }
 }
+
+// Get All User
+
+exports.getAllUser = async (req, res, next) =>{
+    try {
+        
+        // find() will return an array of quotes
+        const users = await User.find({});
+
+        // response back to client if successfully connect to DB
+        res.status(200).json({
+            status: 'Success',
+            results: users.length,
+            data: {
+                userId: users._id, 
+                users 
+            }
+        });
+
+    } catch (error) {
+        res.json(error);
+    }
+};

@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const quoteSchema = new mongoose.Schema({
     gallons: {
         type: Number,
-        trim: true
+        trim: true,
+        required: [true, 'gallons must be required']
     },
 
     delivery_address: {
@@ -37,3 +38,4 @@ const quoteSchema = new mongoose.Schema({
 const Quote = mongoose.model('Quote', quoteSchema);
 
 module.exports = Quote;
+

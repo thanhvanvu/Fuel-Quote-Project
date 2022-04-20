@@ -18,16 +18,7 @@ export default function Hero() {
             {user ? (
                 <>
                     <div id="hero-left">
-
-                        {user.address1 === "" && (
-                            <>
-                                <h1>
-                                    You have not created profile yet. Please Edit your profile.
-                                </h1>
-                            </>
-                        )}
-
-                        {user.address1 &&(
+                        {user.isAdmin ? (
                             <>
                                 <h1>
                                     Thank you for using our application
@@ -35,10 +26,32 @@ export default function Hero() {
                                 <h2>
                                     Sajah Al Zamili - Thanh Vu - Khai Luong
                                 </h2>
-                                <Link to='/fuelquote' id='get-started'>Get Started</Link>
+                            </>
+                        ) : (
+                            <>
+                                {user.address1 === "" && (
+                                    <>
+                                        <h1>
+                                            You have not created profile yet. Please Edit your profile.
+                                        </h1>
+                                    </>
+                                )}
+
+                                {user.address1 && (
+                                    <>
+                                        <h1>
+                                            Thank you for using our application
+                                        </h1>
+                                        <h2>
+                                            Sajah Al Zamili - Thanh Vu - Khai Luong
+                                        </h2>
+                                        <Link to='/fuelquote' id='get-started'>Get Started</Link>
+                                    </>
+                                )}
                             </>
                         )}
-                        
+
+
 
                     </div>
 

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const { db } = require('./Quote');
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -27,7 +28,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true,
         default: "",
-        
     },
 
     address2: {
@@ -52,6 +52,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true,
         default: ""
+    },
+
+    isAdmin: {
+        type: String,
+        trim: true
     }
 });
 
@@ -75,3 +80,4 @@ const User = mongoose.model('User', userSchema)
 
 // exports to use it later 
 module.exports = User
+

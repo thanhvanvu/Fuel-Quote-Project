@@ -58,7 +58,8 @@ export default function Login() {
                 address2,
                 city,
                 state,
-                zipcode
+                zipcode,
+                isAdmin
             } = response.data.data;
 
             // save TOKEN into Local Storage
@@ -74,7 +75,8 @@ export default function Login() {
                     address2,
                     city,
                     state,
-                    zipcode
+                    zipcode,
+                    isAdmin
                 }
             });
 
