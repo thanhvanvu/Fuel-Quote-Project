@@ -11,3 +11,7 @@ To open the project, please follow these steps below:
   2.1/ Open the terminal and run: npm install
   2.2/ run: npm start
 
+3/ Admin page added: Now able to see all the user available in database and all the quotes
+  - Login with account:
+      + email: admin@gmail.com
+      + password: 123456
