@@ -1,6 +1,7 @@
 import React, { useContext, useState, useCallback, useEffect } from "react";
 import AppContext from "./AppContext";
 import axios from "axios";
+import { pricingCalculate } from "./PricingModule";
 export default function FuelQuoteItem({ user }) {
   const { state, dispatch } = useContext(AppContext);
   const { quotes } = state;
@@ -57,9 +58,12 @@ export default function FuelQuoteItem({ user }) {
     let rateHistoryFactor = 0;
     let gallonRequestedFactor = 0;
     const state = user.state.toUpperCase();
+
+    // get user quotes only
     const userQuotes = quotes.filter(
       (quote) => quote.author.name === user.name
     );
+
     const quotesLength = userQuotes.length;
     const companyProfitFactor = 0.1;
     const currentPrice = 1.5;
@@ -82,16 +86,27 @@ export default function FuelQuoteItem({ user }) {
       gallonRequestedFactor = 0.03;
     }
 
-    const margin =
-      currentPrice *
-      (locationFactor -
-        rateHistoryFactor +
-        gallonRequestedFactor +
-        companyProfitFactor);
+    // const margin =
+    //   currentPrice *
+    //   (locationFactor -
+    //     rateHistoryFactor +
+    //     gallonRequestedFactor +
+    //     companyProfitFactor);
 
-    const suggested_price = currentPrice + margin;
+    // const suggested_price = currentPrice + margin;
 
-    const total_amount = gallons * suggested_price;
+    // const total_amount = gallons * suggested_price;
+
+    const [suggested_price, total_amount] = pricingCalculate(
+      gallons,
+      locationFactor,
+      currentPrice,
+      rateHistoryFactor,
+      gallonRequestedFactor,
+      companyProfitFactor
+    );
+
+    console.log(suggested_price, total_amount);
 
     setQuoteInput({
       gallons: gallons.toFixed(),
